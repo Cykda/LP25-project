@@ -36,6 +36,10 @@ Date rendu final: 7 janvier
 
 
 1 - Analyse des arguments <br>
+- voir si tout est en ordre
+- si les bons arguments sont présent
+- si il y a des erreurs de syntaxe et/ou de logique
+
 2 - parcours des fichiers <br>
 3 - récupérations des infos <br>
 4 - traitement des infos <br>
