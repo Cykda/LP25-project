@@ -35,16 +35,16 @@ Date rendu final: 7 janvier
 0 - organiser la structure du projet
 
 
-1 - Analyse des arguments
-2 - parcours des fichiers
-3 - récupérations des infos
-4 - traitement des infos
-5 - copie des fichiers
-6 - modification des infos des fichiers copiés
-7 - comparaison des fichiers ( MD5 )
+1 - Analyse des arguments <br>
+2 - parcours des fichiers <br>
+3 - récupérations des infos <br>
+4 - traitement des infos <br>
+5 - copie des fichiers <br>
+6 - modification des infos des fichiers copiés <br>
+7 - comparaison des fichiers ( MD5 ) <br>
 
 
-8 - *parallélisation des tâches* (**GROSSE TÂCHE**)
+8 - *parallélisation des tâches* (**GROSSE TÂCHE**) <br>
 
 
-9 - greffe sur le squelette
+9 - greffe sur le squelette <br>
