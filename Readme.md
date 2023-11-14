@@ -41,12 +41,22 @@ Date rendu final: 7 janvier
 - si il y a des erreurs de syntaxe et/ou de logique
 
 2 - parcours des fichiers <br>
-3 - récupérations des infos <br>
-4 - traitement des infos <br>
-5 - copie des fichiers <br>
-6 - modification des infos des fichiers copiés <br>
-7 - comparaison des fichiers ( MD5 ) <br>
+- lister récursivement les fichiers sans cas d'erreur
 
+3 - récupérations des infos <br>
+- récup les infos de fichier (ex: date de création, taille, etc...)
+
+4 - traitement des infos <br>
+- centraliser les infos des fichiers et les liker avec le fichier en question
+
+5 - copie des fichiers <br>
+- copie de fichiers bit à bit
+
+6 - modification des infos des fichiers copiés <br>
+- modifier les infos des fichiers fraichement copiés pour se conformer aux anciens fichiers
+
+7 - comparaison des fichiers ( MD5 ) <br>
+- comparer la somme MD5 des fichiers pour se vérifier la bonne copie des fichiers
 
 8 - *parallélisation des tâches* (**GROSSE TÂCHE**) <br>
 
