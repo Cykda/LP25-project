@@ -4,22 +4,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
-#include <openssl/md5.h>
-
-void compute_md5(const char *str, unsigned char digest[16]) {
-    MD5_CTX ctx; 
-    FILE *file = fopen(str, "rb");
-
-    MD5_Init(&ctx);
-    
-    size_t bytes;
-    while ((bytes = fread(digest, 1, 1024, file)) != 0) {
-        MD5_Update(&ctx, str, bytes);
-    }
-    
-    MD5_Final(digest, &ctx);
-    fclose(file);
-}
+#include <openssl/evp.h>
 
 int main() {
     const char *nom_fichier = "test.txt"; // Remplacez cela par le chemin de votre fichier
