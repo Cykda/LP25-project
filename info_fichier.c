@@ -43,23 +43,61 @@ int calculate_md5(const char *filename, unsigned char *md5sum) {
 }
 
 int main() {
-    const char *nom_fichier = "test.txt"; // Remplacez cela par le chemin de votre fichier
+    const char *nom = "Readme.md"; 
 
-    struct stat info_fichier;
+    struct stat info;
 
-    // Obtenez les informations sur le fichier
-    if (stat(nom_fichier, &info_fichier) == -1) {
+    if (stat(nom, &info) == -1) {
         perror("Erreur lors de la récupération des informations sur le fichier");
         exit(EXIT_FAILURE);
     }
 
-    // Affichez la date de création du fichier
-    printf("Date de création du fichier %s : %s", nom_fichier, ctime(&info_fichier.st_ctime));
+    if (S_ISREG(info.st_mode)) {
+        printf("%s il s'agit d'un fichier.\n", nom);
+        printf("Date de la dernière modification du fichier %s : %s", nom, ctime(&info.st_ctime));
 
-    const char *filename = "test.txt"; // Remplacez cela par le chemin de votre fichier
-    unsigned char digest[EVP_MAX_MD_SIZE];
+        printf("Taille du fichier %s: %ld bytes\n", nom, info.st_size);
 
-    calculate_md5(nom_fichier, digest);
+        unsigned char digest[EVP_MAX_MD_SIZE];
+
+        calculate_md5(nom, digest);
+
+        mode_t file_permissions = info.st_mode;
+        
+        printf("Les permitions de %s sont : ", nom);
+
+        S_ISDIR(file_permissions);
+        printf((file_permissions & S_IRUSR) ? "r" : "-");
+        printf((file_permissions & S_IWUSR) ? "w" : "-");
+        printf((file_permissions & S_IXUSR) ? "x" : "-");
+        printf((file_permissions & S_IRGRP) ? "r" : "-");
+        printf((file_permissions & S_IWGRP) ? "w" : "-");
+        printf((file_permissions & S_IXGRP) ? "x" : "-");
+        printf((file_permissions & S_IROTH) ? "r" : "-");
+        printf((file_permissions & S_IWOTH) ? "w" : "-");
+        printf((file_permissions & S_IXOTH) ? "x" : "-");
+
+    } else if (S_ISDIR(info.st_mode)) {
+        printf("%s il ne s'agit d'un dossier.\n", nom);
+
+        mode_t directory_permissions = info.st_mode;
+        
+        printf("Les permitions de %s sont : ", nom);
+
+        S_ISDIR(directory_permissions);
+        printf((directory_permissions & S_IRUSR) ? "r" : "-");
+        printf((directory_permissions & S_IWUSR) ? "w" : "-");
+        printf((directory_permissions & S_IXUSR) ? "x" : "-");
+        printf((directory_permissions & S_IRGRP) ? "r" : "-");
+        printf((directory_permissions & S_IWGRP) ? "w" : "-");
+        printf((directory_permissions & S_IXGRP) ? "x" : "-");
+        printf((directory_permissions & S_IROTH) ? "r" : "-");
+        printf((directory_permissions & S_IWOTH) ? "w" : "-");
+        printf((directory_permissions & S_IXOTH) ? "x" : "-");        
+    } else {
+        printf("Mais tu es con ou ?");
+    }
+    printf("\n");
 
     return 0;
 }
