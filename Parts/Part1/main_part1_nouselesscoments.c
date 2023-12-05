@@ -126,80 +126,6 @@ int main(int argc, char *argv[]) {
         printf("ERREUR");
         return -1;
     }
-    // // Variables pour les options
-    // int date_size_only = 0;
-    // int num = -1;
-    // int no_parallel = 0;
-    // int verbose = 0;
-    // int dry_run = 0;
-
-    // // Vérifier le nombre d'arguments
-    // if (argc < 3) {
-    //     printf("Erreur: Nombre d'arguments insuffisant.\n");
-    // }
-
-    // int opt;
-    // struct option long_options[] = {
-    //     {"date-size-only", no_argument, 0, 'd'},
-    //     {"no-parallel", no_argument, 0, 'p'},
-    //     {"dry-run", no_argument, 0, 'r'},
-    //     {0, 0, 0, 0}
-    // };
-
-    // //Obtention des informations sur les paramètres demandés
-    // while ((opt = getopt_long(argc, argv, "n:v", long_options, NULL)) != -1) {
-    //     switch (opt) {
-    //         case 'n':
-    //             num = atoi(optarg);
-    //             break;
-    //         case 'v':
-    //             verbose = 1;
-    //             break;
-    //         case 'd':
-    //             date_size_only = 1;
-    //             break;
-    //         case 'p':
-    //             no_parallel = 1;
-    //             break;
-    //         case 'r':
-    //             dry_run = 1;
-    //             break;
-    //         case '?':
-    //             if (optopt == 'n') {
-    //                 fprintf(stderr, "Erreur: L'option -%c nécessite un argument.\n", optopt);
-    //             } else if (isprint(optopt)) {
-    //                 fprintf(stderr, "Erreur: Option inconnue -%c.\n", optopt);
-    //             } else {
-    //                 fprintf(stderr, "Erreur: Caractère d'option inconnu '\\x%x'.\n", optopt);
-    //             }
-    //             print_usage();
-    //             exit(EXIT_FAILURE);
-    //     }
-    // }
-
-    // // Dossiers source et destination
-    // char *source = argv[argc-2];
-    // char *destination = argv[argc-1];
-    // // Vérifier si le dossier source existe
-    // if (!directory_exists(source)) {
-    //     printf("Erreur: Le dossier source n'existe pas.\n");
-    //     exit(EXIT_FAILURE);
-    // }
-
-    // // Vérifier si le dossier destination existe
-    // //A RAJOUTER : IL N'EST PAS DANS L'ARBORESCENCE DE FICHIERS DESTINATION
-    // if (!directory_exists(destination)) {
-    //     printf("Erreur: Le dossier destination n'existe pas.\n");
-    //     exit(EXIT_FAILURE);
-    // } else if (!is_directory_writable(destination)) {
-    //     printf("Erreur: Le dossier destination existe mais n'est pas accessible en écriture.\n");
-    //     exit(EXIT_FAILURE);
-    // }
-
-    // //afficher les fichiers source et destination s'ils sont conforme aux normes demandées
-    // printf("Dossier source: %s et dossier destination : %s\n",source,destination);
-
-    // printf("Je sapelle groot %s et %s\n",&my_config.source, &my_config.destination);
 
     if (!directory_exists(my_config.source) || !directory_exists(my_config.destination)) {
         printf("Either source or destination directory do not exist\nAborting\n");
@@ -210,13 +136,5 @@ int main(int argc, char *argv[]) {
         printf("Destination directory %s is not writable\n", my_config.destination);
         return -1;
     }
-
-    // // Afficher les options détectées
-    // if (date_size_only) printf("Option détectée: --date-size-only\n");
-    // if (num != -1) printf("Option détectée: -n %d\n", num);
-    // if (no_parallel) printf("Option détectée: --no-parallel\n");
-    // if (verbose) printf("Option détectée: -v\n");
-    // if (dry_run) printf("Option détectée: --dry-run\n");
-    
     return 0;
 }
