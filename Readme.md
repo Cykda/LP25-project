@@ -71,7 +71,7 @@ Date rendu final: 7 janvier
 ## Etat de Greffe
 
 Branches greffes:
-- [ ] analyse
+- [x] analyse
 - [ ] comparaison
 - [ ] copie
 - [ ] modif
