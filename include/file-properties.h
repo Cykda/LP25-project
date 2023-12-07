@@ -1,4 +1,6 @@
-#pragma once
+#ifndef FILES_PROPERTIES_H
+#define FILES_PROPERTIES_H
+
 
 #include <files-list.h>
 #include <stdbool.h>
@@ -8,3 +10,5 @@ int get_file_stats(files_list_entry_t *entry);
 int compute_file_md5(files_list_entry_t *entry);
 bool directory_exists(char *path_to_dir);
 bool is_directory_writable(char *path_to_dir);
+
+#endif /*FILES_PROPERTIES_H*/

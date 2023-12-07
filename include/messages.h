@@ -1,4 +1,6 @@
-#pragma once
+#ifndef MESSAGES_H
+#define MESSAGES_H
+
 
 #include <files-list.h>
 #include <defines.h>
@@ -56,3 +58,5 @@ int send_files_list_element(int msg_queue, int recipient, files_list_entry_t *fi
 int send_list_end(int msg_queue, int recipient);
 int send_terminate_command(int msg_queue, int recipient);
 int send_terminate_confirm(int msg_queue, int recipient);
+
+#endif /*MESSAGES_H*/

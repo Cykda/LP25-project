@@ -1,4 +1,6 @@
-#pragma once
+#ifndef FILES_LIST_H
+#define FILES_LIST_H
+
 
 #include <stdint.h>
 #include <time.h>
@@ -28,3 +30,7 @@ int add_entry_to_tail(files_list_t *list, files_list_entry_t *entry);
 files_list_entry_t *find_entry_by_name(files_list_t *list, char *file_path, size_t start_of_src, size_t start_of_dest);
 void display_files_list(files_list_t *list);
 void display_files_list_reversed(files_list_t *list);
+
+
+
+#endif /*FILES_LIST_H*/

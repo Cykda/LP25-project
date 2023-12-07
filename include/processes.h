@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PROCESSES_H
+#define PROCESSES_H
 
 #include <configuration.h>
 #include <sys/ipc.h>
@@ -39,3 +40,5 @@ void lister_process_loop(void *parameters);
 void analyzer_process_loop(void *parameters);
 void clean_processes(configuration_t *the_config, process_context_t *p_context);
 void request_element_details(int msg_queue, files_list_entry_t *entry, lister_configuration_t *cfg, int *current_analyzers);
+
+#endif /*PROCESSES_H*/

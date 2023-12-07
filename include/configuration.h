@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CONFIGURATION_H
+#define CONFIGURATION_H
+
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -15,3 +17,5 @@ typedef struct {
 
 void init_configuration(configuration_t *the_config);
 int set_configuration(configuration_t *the_config, int argc, char *argv[]);
+
+#endif /*CONFIGURATION_H*/

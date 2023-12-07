@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SYNC_H
+#define SYNC_H
 
 #include <stdbool.h>
 #include <files-list.h>
@@ -14,3 +15,5 @@ void copy_entry_to_destination(files_list_entry_t *source_entry, configuration_t
 void make_list(files_list_t *list, char *target);
 DIR *open_dir(char *path);
 struct dirent *get_next_entry(DIR *dir);
+
+#endif /*SYNC_H*/
