@@ -62,3 +62,19 @@ Date rendu final: 7 janvier
 
 
 9 - greffe sur le squelette <br>
+
+
+
+
+
+
+## Etat de Greffe
+
+Branches greffes:
+- [ ] analyse
+- [ ] comparaison
+- [ ] copie
+- [ ] modif
+- [ ] paral
+- [x] parcours
+- [ ] recup

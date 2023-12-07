@@ -16,7 +16,11 @@ void clear_files_list(files_list_t *list) {
         list->head = tmp->next;
         free(tmp);
     }
+    free(list); // useful, prevent memory leaks and forgotten free() in main()
 }
+
+
+
 
 /*!
  *  @brief add_file_entry adds a new file to the files list.
@@ -28,6 +32,42 @@ void clear_files_list(files_list_t *list) {
  *  @return a pointer to the added element if success, NULL else (out of memory)
  */
 files_list_entry_t *add_file_entry(files_list_t *list, char *file_path) {
+    
+    
+    files_list_entry_t *new_file_entry = malloc(sizeof(*new_file_entry));
+    if (!new_file_entry || !list || !list->head || !file_path) {return NULL;}
+    
+
+    files_list_entry_t *tmp = list->head;
+    strcpy(new_file_entry->path_and_name, file_path);
+    
+    
+    while (tmp->next)
+    {
+        if (!strcmp(tmp->path_and_name, file_path)) {return new_file_entry;}
+        else if(strcmp(tmp->path_and_name, file_path) < 0 )
+        {
+
+            new_file_entry->next = tmp->next;
+            new_file_entry->prev = tmp;
+            tmp->next = new_file_entry;
+            
+            
+            return new_file_entry;
+        }
+        else 
+        {
+            tmp = tmp->next;
+        }
+    }
+    if (!tmp->next) 
+    {
+        tmp->next = new_file_entry;
+        new_file_entry->prev = tmp;
+        new_file_entry->next = NULL;
+        return new_file_entry;
+    }
+
 }
 
 /*!
@@ -39,6 +79,23 @@ files_list_entry_t *add_file_entry(files_list_t *list, char *file_path) {
  * @return 0 in case of success, -1 else
  */
 int add_entry_to_tail(files_list_t *list, files_list_entry_t *entry) {
+    if (!entry) {return -EXIT_FAILURE;}
+
+    entry->next = NULL;
+    entry->prev = list->tail;
+    if (!list->head)
+    {
+        list->head = entry;
+    } 
+    else
+    {
+        list->tail->next = entry;
+    }
+    
+    list->tail = entry;
+    
+    
+    return EXIT_SUCCESS;
 }
 
 /*!
@@ -51,6 +108,18 @@ int add_entry_to_tail(files_list_t *list, files_list_entry_t *entry) {
  *  @return a pointer to the element found, NULL if none were found.
  */
 files_list_entry_t *find_entry_by_name(files_list_t *list, char *file_path, size_t start_of_src, size_t start_of_dest) {
+
+    files_list_entry_t* element = list->head;
+    while (element)
+    {
+        if (!strcmp(element->path_and_name + start_of_src, file_path + start_of_dest))
+        {
+            return element;
+        }
+        element = element->next;
+    }
+    return NULL;
+
 }
 
 /*!

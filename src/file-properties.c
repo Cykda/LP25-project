@@ -44,6 +44,12 @@ int compute_file_md5(files_list_entry_t *entry) {
  * @return true if directory exists, false else
  */
 bool directory_exists(char *path_to_dir) {
+    struct stat dir_stat;
+    if (stat(path_to_dir, &dir_stat) == 0 && S_ISDIR(dir_stat.st_mode)) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /*!
@@ -53,4 +59,9 @@ bool directory_exists(char *path_to_dir) {
  * Hint: try to open a file in write mode in the target directory.
  */
 bool is_directory_writable(char *path_to_dir) {
+    if (access(path_to_dir, W_OK) == -1){
+        return 0;
+    } else {
+        return 1;
+    }
 }

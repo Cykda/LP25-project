@@ -27,6 +27,11 @@ void display_help(char *my_name) {
  * @param the_config is a pointer to the configuration to be initialized
  */
 void init_configuration(configuration_t *the_config) {
+    strcpy(the_config->source, "");
+    strcpy(the_config->destination, "");
+    the_config->processes_count = 1;
+    the_config->is_parallel = false;
+    the_config->uses_md5 = false;
 }
 
 /*!
@@ -37,4 +42,47 @@ void init_configuration(configuration_t *the_config) {
  * @return -1 if configuration cannot succeed, 0 when ok
  */
 int set_configuration(configuration_t *the_config, int argc, char *argv[]) {
+    // Si le nombre d'arguments est insuffisant
+    if (argc < 3) {
+        printf("Erreur: Nombre d'arguments insuffisant.\n");
+        return -1;
+    }
+
+    // Copie des valeurs des arguments dans la configuration
+    strcpy(the_config->source, argv[1]);
+    strcpy(the_config->destination, argv[2]);
+
+    // Liste des arguments activés
+    // Parcourir les autres options si nécessaire
+    printf(" Fichier zourze : %s // Fichier Dezdinazion : %s",&the_config->source, the_config->destination);
+    if (argc > 3){
+        printf("arguments active :\n");
+        for (int i = 3; i < argc; ++i) {
+            if (strcmp(argv[i], "--date-size-only") == 0) {
+                // Gérer l'option --date-size-only
+                the_config->uses_md5 = true;
+                printf("arguments active : --date-size-only\n");
+            } else if (strcmp(argv[i], "-n") == 0) {
+                // Gérer l'option -n
+                if (i + 1 < argc) {
+                    the_config->processes_count = atoi(argv[i + 1]);
+                    i++;  // Passer à l'argument suivant
+                }
+                printf("arguments active : -n %d\n", the_config->processes_count);
+            } else if (strcmp(argv[i], "--no-parallel") == 0) {
+                // Gérer l'option --no-parallel
+                the_config->is_parallel = false;
+                printf("arguments active : --no-parallel\n");
+            } else if (strcmp(argv[i], "-v") == 0) {
+                // Gérer l'option -v
+                printf("arguments active : -v\n");
+            } else if (strcmp(argv[i], "--dry-run") == 0) {
+                // Gérer l'option --dry-run
+                printf("arguments active : --dry-run\n");
+            } else {
+                // Gérer les options inconnues
+                printf("Erreur: Option inconnue %s.\n", argv[i]);
+                return -1;
+            }
+        }
 }
