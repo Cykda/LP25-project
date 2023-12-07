@@ -54,34 +54,34 @@ int set_configuration(configuration_t *the_config, int argc, char *argv[]) {
 
     // Liste des arguments activés
     // Parcourir les autres options si nécessaire
-    printf(" Fichier zourze : %s // Fichier Dezdinazion : %s",&the_config->source, the_config->destination);
+    printf("Fichier zourze : %s \nFichier Dezdinazion : %s\n",&the_config->source, the_config->destination);
     if (argc > 3){
         printf("arguments active :\n");
         for (int i = 3; i < argc; ++i) {
             if (strcmp(argv[i], "--date-size-only") == 0) {
                 // Gérer l'option --date-size-only
                 the_config->uses_md5 = true;
-                printf("arguments active : --date-size-only\n");
+                printf("\targument --date-size-only active\n");
             } else if (strcmp(argv[i], "-n") == 0) {
                 // Gérer l'option -n
                 if (i + 1 < argc) {
                     the_config->processes_count = atoi(argv[i + 1]);
                     i++;  // Passer à l'argument suivant
                 }
-                printf("arguments active : -n %d\n", the_config->processes_count);
+                printf("\targuments -n with %d active\n", the_config->processes_count);
             } else if (strcmp(argv[i], "--no-parallel") == 0) {
                 // Gérer l'option --no-parallel
                 the_config->is_parallel = false;
-                printf("arguments active : --no-parallel\n");
+                printf("\targuments --no-parallel active\n");
             } else if (strcmp(argv[i], "-v") == 0) {
                 // Gérer l'option -v
-                printf("arguments active : -v\n");
+                printf("\targuments active : -v\n");
             } else if (strcmp(argv[i], "--dry-run") == 0) {
                 // Gérer l'option --dry-run
-                printf("arguments active : --dry-run\n");
+                printf("\targuments --dry-run active\n");
             } else {
                 // Gérer les options inconnues
-                printf("Erreur: Option inconnue %s.\n", argv[i]);
+                printf("\tERROR: Unknown option %s.\n", argv[i]);
                 return -1;
             }
         }

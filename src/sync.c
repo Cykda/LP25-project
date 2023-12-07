@@ -27,7 +27,7 @@ void synchronize(configuration_t *the_config, process_context_t *p_context) {
  * @brief mismatch tests if two files with the same name (one in source, one in destination) are equal
  * @param lhd a files list entry from the source
  * @param rhd a files list entry from the destination
- * @has_md5 a value to enable or disable MD5 sum check
+ * @param has_md5 a value to enable or disable MD5 sum check
  * @return true if both files are not equal, false else
  */
 bool mismatch(files_list_entry_t *lhd, files_list_entry_t *rhd, bool has_md5) {
