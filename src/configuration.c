@@ -61,9 +61,7 @@ int set_configuration(configuration_t *the_config, int argc, char *argv[]) {
     for (int i = 3; i < argc; ++i) {
         if (strcmp(argv[i], "--date-size-only") == 0) {
             // Gérer l'option --date-size-only
-            
-            the_config->uses_md5 = true; // /!\ VERIFIER
-            //the_config->uses_md5 = false;
+            the_config->uses_md5 = false;
             printf("\targument --date-size-only active\n");
             
         } else if (strcmp(argv[i], "-n") == 0) {

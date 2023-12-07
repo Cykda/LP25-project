@@ -5,6 +5,8 @@
 #include <file-properties.h>
 #include <processes.h>
 #include <unistd.h>
+#include "colors.h"
+
 
 /*!
  * @brief main function, calling all the mechanics of the program
@@ -13,6 +15,9 @@
  * @return 0 in case of success, -1 else
  * Function is already provided with full implementation, you **shall not** modify it.
  */
+
+
+/*
 int main(int argc, char *argv[]) {
     // Check parameters:
     // - source and destination are provided
@@ -47,4 +52,21 @@ int main(int argc, char *argv[]) {
     clean_processes(&my_config, &processes_context);
 
     return 0;
+}
+
+*/
+
+
+
+#include "errors.h"
+
+
+int main(int argc, char** argv)
+{
+    
+
+    return 0;
+    
+    
+    
 }
