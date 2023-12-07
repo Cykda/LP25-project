@@ -55,37 +55,45 @@ int set_configuration(configuration_t *the_config, int argc, char *argv[]) {
     // Liste des arguments activés
     // Parcourir les autres options si nécessaire
     printf("Fichier zourze : %s \nFichier Dezdinazion : %s\n",&the_config->source, the_config->destination);
-    if (argc > 3){
-        printf("arguments active :\n");
-        for (int i = 3; i < argc; ++i) {
-            if (strcmp(argv[i], "--date-size-only") == 0) {
-                // Gérer l'option --date-size-only
-                the_config->uses_md5 = true;
-                printf("\targument --date-size-only active\n");
-            } else if (strcmp(argv[i], "-n") == 0) {
-                // Gérer l'option -n
-                if (i + 1 < argc) {
-                    the_config->processes_count = atoi(argv[i + 1]);
-                    i++;  // Passer à l'argument suivant
-                }
-                printf("\targuments -n with %d active\n", the_config->processes_count);
-            } else if (strcmp(argv[i], "--no-parallel") == 0) {
-                // Gérer l'option --no-parallel
-                the_config->is_parallel = false;
-                printf("\targuments --no-parallel active\n");
-            } else if (strcmp(argv[i], "-v") == 0) {
-                // Gérer l'option -v
-                printf("\targuments active : -v\n");
-            } else if (strcmp(argv[i], "--dry-run") == 0) {
-                // Gérer l'option --dry-run
-                printf("\targuments --dry-run active\n");
-            } else {
-                // Gérer les options inconnues
-                printf("\tERROR: Unknown option %s.\n", argv[i]);
-                return -1;
+    if(argc <= 3){return EXIT_SUCCESS;}
+
+    printf("Active arguments :\n");
+    for (int i = 3; i < argc; ++i) {
+        if (strcmp(argv[i], "--date-size-only") == 0) {
+            // Gérer l'option --date-size-only
+            
+            the_config->uses_md5 = true; // /!\ VERIFIER
+            //the_config->uses_md5 = false;
+            printf("\targument --date-size-only active\n");
+            
+        } else if (strcmp(argv[i], "-n") == 0) {
+            // Gérer l'option -n
+            if (i + 1 >= argc) {
+                printf("ERROR: -n argument was used incorectly\n");
+                return -EXIT_FAILURE;
+
             }
+            the_config->processes_count = atoi(argv[i + 1]);
+            i++;  // Passer à l'argument suivant
+            printf("\targument -n with %d processes active\n", the_config->processes_count);
+        } else if (strcmp(argv[i], "--no-parallel") == 0) {
+            // Gérer l'option --no-parallel
+            the_config->is_parallel = false;
+            printf("\targument --no-parallel active\n");
+        } else if (strcmp(argv[i], "-v") == 0) {
+            // Gérer l'option -v
+            printf("\targument -v active\n");
+        } else if (strcmp(argv[i], "--dry-run") == 0) {
+            // Gérer l'option --dry-run
+            printf("\targument --dry-run active\n");
+        } else {
+            // Gérer les options inconnues
+            printf("\tERROR: Unknown option %s.\n", argv[i]);
+            return -EXIT_FAILURE;
         }
     }
     
+    
+    return EXIT_SUCCESS;
     
 }
