@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
 #include <sync.h>
 #include <configuration.h>
@@ -16,8 +17,8 @@
  * Function is already provided with full implementation, you **shall not** modify it.
  */
 
-
 /*
+
 int main(int argc, char *argv[]) {
     // Check parameters:
     // - source and destination are provided
@@ -58,15 +59,22 @@ int main(int argc, char *argv[]) {
 
 
 
-#include "errors.h"
-
 
 int main(int argc, char** argv)
 {
+    /*
+    files_list_t *list = malloc(sizeof(*list));
+    list->head = malloc(sizeof(*list->head));
+    list->tail = NULL;
     
 
-    return 0;
+    make_files_list(list, "..");
+
     
-    
-    
+    clear_files_list(list);
+    free(list);
+    */
+   
+   CFprintf(FG_COLOR_DRED, "Hello World\n");
+
 }

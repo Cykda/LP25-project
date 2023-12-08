@@ -16,7 +16,6 @@ void clear_files_list(files_list_t *list) {
         list->head = tmp->next;
         free(tmp);
     }
-    free(list); // useful, prevent memory leaks and forgotten free() in main()
 }
 
 
@@ -35,7 +34,7 @@ files_list_entry_t *add_file_entry(files_list_t *list, char *file_path) {
     
     
     files_list_entry_t *new_file_entry = malloc(sizeof(*new_file_entry));
-    if (!new_file_entry || !list || !list->head || !file_path) {return NULL;}
+    if (!new_file_entry || !list->head || !file_path) {return NULL;}
     
 
     files_list_entry_t *tmp = list->head;

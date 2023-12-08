@@ -39,6 +39,24 @@ bool mismatch(files_list_entry_t *lhd, files_list_entry_t *rhd, bool has_md5) {
  * @param target_path is the path whose files to list
  */
 void make_files_list(files_list_t *list, char *target_path) {
+    
+    DIR *d;
+    struct dirent *dir;
+    d = opendir(target_path);
+    
+    if (d) {
+        while ((dir = readdir(d)) != NULL) {
+            if(strcmp(dir->d_name, ".") && strcmp(dir->d_name, "..")) // exclude . and .. or we could be stuck in an infinite loop
+            {
+                
+            }
+        }
+        closedir(d);
+    }
+
+    
+    
+    
 }
 
 /*!
@@ -68,6 +86,21 @@ void copy_entry_to_destination(files_list_entry_t *source_entry, configuration_t
  * @param target is the target dir whose content must be listed
  */
 void make_list(files_list_t *list, char *target) {
+    
+    DIR *d;
+    struct dirent *dir;
+    d = opendir(target);
+    
+    if (d) {
+        while ((dir = readdir(d)) != NULL) {
+            if(strcmp(dir->d_name, ".") && strcmp(dir->d_name, "..")) // exclude . and .. or we could be stuck in an infinite loop
+            {
+                add_file_entry(list, dir->d_name);
+            }
+        }
+        closedir(d);
+    }
+
 }
 
 /*!
@@ -76,6 +109,9 @@ void make_list(files_list_t *list, char *target) {
  * @return a pointer to a dir, NULL if it cannot be opened
  */
 DIR *open_dir(char *path) {
+    DIR *d;
+    d = opendir(path);
+    return d;
 }
 
 /*!
