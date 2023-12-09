@@ -40,6 +40,7 @@ bool mismatch(files_list_entry_t *lhd, files_list_entry_t *rhd, bool has_md5) {
  */
 void make_files_list(files_list_t *list, char *target_path) {
     
+
     DIR *d;
     struct dirent *dir;
     d = opendir(target_path);
@@ -48,7 +49,7 @@ void make_files_list(files_list_t *list, char *target_path) {
         while ((dir = readdir(d)) != NULL) {
             if(strcmp(dir->d_name, ".") && strcmp(dir->d_name, "..")) // exclude . and .. or we could be stuck in an infinite loop
             {
-                
+                add_file_entry(list, dir->d_name);
             }
         }
         closedir(d);
@@ -86,16 +87,31 @@ void copy_entry_to_destination(files_list_entry_t *source_entry, configuration_t
  * @param target is the target dir whose content must be listed
  */
 void make_list(files_list_t *list, char *target) {
-    
     DIR *d;
     struct dirent *dir;
     d = opendir(target);
+    char path[PATH_SIZE];
+    struct stat path_stat;
     
     if (d) {
         while ((dir = readdir(d)) != NULL) {
-            if(strcmp(dir->d_name, ".") && strcmp(dir->d_name, "..")) // exclude . and .. or we could be stuck in an infinite loop
+            if(strcmp(dir->d_name, ".") && strcmp(dir->d_name, "..")) // exclude . and .. or we would be stuck in an infinite loop
             {
-                add_file_entry(list, dir->d_name);
+
+
+                strcpy(path, target);
+                strcat(path, "/");
+                strcat(path, dir->d_name);
+
+                add_file_entry(list, path);
+                stat(path, &path_stat);
+                
+                if(S_ISREG(path_stat.st_mode) == 0)
+                {
+                    make_list(list, path);
+                }
+
+
             }
         }
         closedir(d);
