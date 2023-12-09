@@ -68,9 +68,9 @@ int main(int argc, char** argv)
     list->tail = NULL;
     
 
-    make_list(list, "..");
+    make_files_list(list, ".");
 
-    display_files_list(list);
+    //display_files_list(list);
     clear_files_list(list);
     free(list);
 
