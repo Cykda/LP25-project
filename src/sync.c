@@ -11,7 +11,7 @@
 #include <unistd.h>
 #include <sys/msg.h>
 #include <utime.h>
-
+#include "errors.h"
 #include <stdio.h>
 
 /*!
@@ -24,11 +24,14 @@
 void synchronize(configuration_t *the_config, process_context_t *p_context) {
     files_list_entry_t source;
     strcpy(source.path_and_name, the_config->source);
+    printf("A\n");
     get_file_stats(&source);
 
     files_list_entry_t destination;
     strcpy(source.path_and_name, the_config->destination);
+    printf("B\n");
     get_file_stats(&destination);
+    printf("C\n");
 
     files_list_entry_t differences;
     strcpy(differences.path_and_name, "");
@@ -202,7 +205,7 @@ void make_files_list(files_list_t *list, char *target_path) {
     for(files_list_entry_t *fle = list->head; fle != NULL; fle = fle->next)
     {
         get_file_stats(fle);
-        printf("%s %lu\n", fle->path_and_name, fle->size);
+        fprintf(stdout, "%s\n", fle->path_and_name);
     }
 
 
@@ -230,7 +233,24 @@ void make_files_lists_parallel(files_list_t *src_list, files_list_t *dst_list, c
  * Use sendfile to copy the file, mkdir to create the directory
  */
 void copy_entry_to_destination(files_list_entry_t *source_entry, configuration_t *the_config) {
-    
+
+    int read_fd;
+    int write_fd;
+    struct stat stat_buf;
+    off_t offset = 0;
+
+    read_fd = open (the_config->source, O_RDONLY);
+    fstat (read_fd, &stat_buf);
+
+    write_fd = open (the_config->destination, O_WRONLY | O_CREAT, stat_buf.st_mode);
+
+    sendfile (write_fd, read_fd, &offset, stat_buf.st_size);
+
+    close (read_fd);
+    close (write_fd);
+
+
+
 }
 
 /*!

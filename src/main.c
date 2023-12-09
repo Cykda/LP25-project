@@ -17,7 +17,6 @@
  * Function is already provided with full implementation, you **shall not** modify it.
  */
 
-/*
 
 int main(int argc, char *argv[]) {
     // Check parameters:
@@ -47,6 +46,7 @@ int main(int argc, char *argv[]) {
     prepare(&my_config, &processes_context);
 
     // Run synchronize:
+    printf("SYNC RUN\n");
     synchronize(&my_config, &processes_context);
     
     // Clean resources
@@ -55,20 +55,28 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-*/
-
-
+/*
 
 
 int main(int argc, char** argv)
 {
 
+    configuration_t config;
+    strcpy(config.source, "./Readme.md");
+    strcpy(config.destination, "../Readme.md");
     files_list_t *list = malloc(sizeof(*list));
     list->head = malloc(sizeof(*list->head));
     list->tail = NULL;
     
 
     make_files_list(list, ".");
+    printf("\n\n\n");
+    printf("FILE: FROM: %s TO: %s\n", config.source, config.destination);
+
+    //copy_entry_to_destination(list->head, &config);
+
+
+
 
     //display_files_list(list);
     clear_files_list(list);
@@ -76,3 +84,4 @@ int main(int argc, char** argv)
 
 
 }
+*/
