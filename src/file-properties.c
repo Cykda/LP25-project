@@ -28,10 +28,9 @@
  */
 int get_file_stats(files_list_entry_t *entry) {
     const char *nom = entry->path_and_name;
-
     struct stat info;
 
-    if (stat(nom, &info) == -1) {
+    if (stat(entry->path_and_name, &info) == -1) {
         perror("Erreur lors de la récupération des informations sur le fichier");
         return -1;
     }
@@ -54,7 +53,7 @@ int get_file_stats(files_list_entry_t *entry) {
         mode_t file_permissions = info.st_mode;
         S_ISDIR(file_permissions);
         entry->mode= file_permissions;
-
+        
         return 0;
 
     } else if (S_ISDIR(info.st_mode)) {

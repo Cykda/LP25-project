@@ -10,5 +10,20 @@
  * @param suffix the second part of the resulting path
  * @return a pointer to the resulting path, NULL when concatenation failed
  */
+
+
 char *concat_path(char *result, char *prefix, char *suffix) {
+    if (!prefix || !suffix) {return NULL;}
+
+    if (strlen(prefix) + strlen(suffix) + 2 > PATH_SIZE) {
+        return NULL;
+    }
+
+    if (prefix[strlen(prefix) - 1] == '/') {
+        snprintf(result, PATH_SIZE, "%s%s", prefix, suffix);
+    } else {
+        snprintf(result, PATH_SIZE, "%s/%s", prefix, suffix);
+    }
+
+    return result;
 }

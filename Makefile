@@ -29,3 +29,4 @@ lp25-backup: $(SRC_DIR)/main.c $(BIN_DIR)/files-list.o $(BIN_DIR)/sync.o $(BIN_D
 
 clean:
 	rm -f $(BIN_DIR)/*.o $(BIN_DIR)/lp25-backup
+	rm -rf ./Fin/Dbu

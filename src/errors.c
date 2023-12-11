@@ -36,7 +36,6 @@ void throwError(enum ErrorType t, const char* err, ...)
     
 
     printf("%s", COLOR_RESET);
-    
     vprintf(err, ptr);
     
     
